@@ -5,7 +5,7 @@
   "authors": [
     "Chuck Holbrook <chuck@streetdeck.com>"
   ],
-  "description": "An AngularJS form validation shaking directive. It includes an easy to use delegate that can be used to shake any element attributed with the shake-it directive.  Also works great with ionic.",
+  "description": "An AngularJS / Ionic form validation shaking directive.  Uses a delegate that can shake any element attributed with the shake-it directive.",
   "main": [
     "shake-it.js",
     "shake-it.css"
