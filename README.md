@@ -1,5 +1,5 @@
-# background-data-service
-An AngularJS form shaking directive. It includes an easy to use delegate that can be used to shake any element 
+# shake-it
+An AngularJS form shaking directive for angular and ionic. It includes an easy to use delegate that can be used to shake any element 
 attributed with the shake-it directive.  This directive works great with Ionic too.  The .shake CSS class can be changed
 to any animation you like.
 
@@ -28,32 +28,24 @@ when you want it to shake.
 
 ### Example
 
-NOTE: This is an **Incomplete Example** TokenService, RecentService, FavoritesService are not provided.  You should 
-replace TokenService with your authentication provider.  RecentService and FavoritesService are the services that 
-should be called when idle.
+form_template.html
+```html
+    <form shake-it="loginForm" name="loginForm">
+        <button ng-click="login(loginForm)">
+            Login
+        </button>
+    </form>
+```
 
+formController.js
 ```js
-angular.module('yourApp').run(function ($q, $rootScope, TokenService, RecentService, FavoritesService) {
-        // Data to get in the background when idle
-        var deferredRecent = $q.defer();
-        deferredRecent.promise.then(function(){
-            //This calls two services simultaneously as the data they retrieve is small.  Register mulitple deferral
-            //objects if your are retrieveing large amounts in the data in the background and don't want to over tax
-            //your app.  
-            RecentService.getRecent('patient');
-            FavoritesService.getFavoritePrescriptions();
-        });
-        BackgroundDataService.callMeWhenIdle(deferredRecent);
-
-        //Start the background idle timer after logging in, stop it when logging out
-        $rootScope.$on(TokenService.authenticationStatusChanged, function (event, loggedIn) {
-            if (loggedIn) {
-                BackgroundDataService.init(3 /*idle seconds*/, true /* debug logging on */);
-            } else {
-                BackgroundDataService.stop();
-            }
-        });
-    });
+$scope.login = function login(form) {
+    if (!form.$valid) {
+        ShakeItDelegate.shakeIt('loginForm');
+    } else {
+        //Do login
+    }
+}
 ```
 
 ### Questions, Comments, Concerns?
