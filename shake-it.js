@@ -53,7 +53,14 @@
 
 
     /**
-     * Shakes the specified element whenever the value of the attribute is changed to a truthy value
+     * Shakes the specified element whenever ShakeItDelegate.shakeIt() is called with the name that was passed to
+     * the attribute.
+     *
+     * @example
+     * <div shake-it="loginForm"></div>
+     *
+     * if (!form.$valid) ShakeItDelegate.shakeIt('loginForm');
+     *
      */
     function shakeItDirectiveFn() {
         return {
