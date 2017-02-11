@@ -1,0 +1,34 @@
+{
+  "name": "shake-it",
+  "version": "1.0.0",
+  "homepage": "https://github.com/godofcpu/shake-it",
+  "authors": [
+    "Chuck Holbrook <chuck@streetdeck.com>"
+  ],
+  "description": "An AngularJS form validation shaking directive. It includes an easy to use delegate that can be used to shake any element attributed with the shake-it directive.  Also works great with ionic.",
+  "main": [
+    "shake-it.js",
+    "shake-it.css"
+  ],
+  "keywords": [
+    "Form validation",
+    "CSS",
+    "angularjs",
+    "ionic",
+    "shake",
+    "login",
+    "validation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": ">= 1.0.8"
+  },
+  "dependencies": {}
+}
