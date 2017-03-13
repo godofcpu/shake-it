@@ -24,12 +24,20 @@
      * @description The shake it delegate is used to shake a particular element that has been attributed with the
      * shake-it directive
      */
-    function ShakeItDelegateFn($animate) {
+    function ShakeItDelegateFn($animate, $injector) {
 
         var ShakeItDelegate = {};
 
         function shakeElement(element) {
             if (element) {
+                var $ionicScrollDelegate = $injector.get('$ionicScrollDelegate');
+                if ($ionicScrollDelegate) {
+                    var $ionicPosition = $injector.get('$ionicPosition');
+                    var position = $ionicPosition.position(element);
+                    $ionicScrollDelegate.scrollTo(0, position.top + $ionicScrollDelegate.getScrollPosition().top);
+                }
+
+
                 $animate.addClass(element, 'shake').then(function () {
                     $animate.removeClass(element, 'shake');
                 });
@@ -43,6 +51,7 @@
             for (var elementName in _elementsToShake) {
                 if (!name || elementName === name) {
                     shakeElement(_elementsToShake[elementName]);
+                    return
                 }
             }
         };
@@ -53,25 +62,15 @@
 
 
     /**
-     * Shakes the specified element whenever ShakeItDelegate.shakeIt() is called with the name that was passed to
-     * the attribute.
-     *
-     * @example
-     * <div shake-it="loginForm"></div>
-     *
-     * if (!form.$valid) ShakeItDelegate.shakeIt('loginForm');
-     *
+     * Shakes the specified element whenever the value of the attribute is changed to a truthy value
      */
     function shakeItDirectiveFn() {
         return {
             restrict: 'A',
-            scope: {
-                shakeIt: '@'
-            },
 
-            link: function ($scope, $element) {
+            link: function ($scope, $element, $attr) {
                 _elementCount++;
-                var name = $scope.shakeIt || 'shake' + _elementCount;
+                var name = $attr.shakeIt || 'shake' + _elementCount;
                 _elementsToShake[name] = $element;
 
 
