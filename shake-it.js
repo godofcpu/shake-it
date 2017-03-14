@@ -34,7 +34,10 @@
                 if ($ionicScrollDelegate) {
                     var $ionicPosition = $injector.get('$ionicPosition');
                     var position = $ionicPosition.position(element);
-                    $ionicScrollDelegate.scrollTo(0, position.top + $ionicScrollDelegate.getScrollPosition().top);
+                    var scrollPosition = $ionicScrollDelegate.getScrollPosition();
+                    if (scrollPosition) {
+                        $ionicScrollDelegate.scrollTo(0, position.top + scrollPosition.top);
+                    }
                 }
 
 
